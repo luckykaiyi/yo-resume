@@ -1,0 +1,109 @@
+<div class="row">
+  <div class="col-md-6 section-edit hidden-print">
+    <div class="slogan">
+      <h2>Edit now!</h2>
+    </div>
+    <form class="edit-form" novalidate autocomplete="off">
+      <div class="form-group">
+        <label class="sr-only" for="name">your name</label>
+        <div class="input-group">
+          <input type="text" class="form-control" id="name" placeholder="Name" ng-model="user.name">
+          <div class="input-group-addon"><input type="color" ng-model="user.nameColor"></div>
+        </div>
+      </div>       
+      <div class="form-group">
+        <button type="button" class="btn btn-default btn-block" ng-click="setContact()"><span class="glyphicon {{contactIcon}}"></span>联系方式</button>
+        <div class="form-items" ng-hide="showContact">
+          <div class="form-item">
+            <label class="sr-only" for="phone">手机号</label>
+            <input type="text" class="form-control" id="phone" placeholder="Phone" ng-model="user.phone">
+          </div>
+          <div class="form-item">
+            <label class="sr-only" for="mail">邮箱</label>
+            <input type="text" class="form-control" id="mail" placeholder="Mail" ng-model="user.mail">
+          </div>
+          <div class="form-item">
+            <label class="sr-only" for="blog">博客</label>
+            <input type="text" class="form-control" id="blog" placeholder="Blog" ng-model="user.blog">
+          </div>
+          <div class="form-item">
+            <label class="sr-only" for="github">GitHub</label>
+            <input type="text" class="form-control" id="github" placeholder="GitHub" ng-model="user.github">
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn btn-default btn-block" ng-click="setEducation()"><span class="glyphicon {{educationIcon}}"></span>教育背景</button>
+        <div class="form-items" ng-hide="showEducation">
+          <div class="input-group">
+            <input type="text" ng-model="edu.startYear" placeholder="2009" class="inline-control w-15">
+            <input type="text" ng-model="edu.endYear" placeholder="2013" class="inline-control w-15">
+            <input type="text" ng-model="edu.college" placeholder="X X 大学" class="inline-control w-40" >
+            <input type="text" ng-model="edu.level" placeholder="本科" class="inline-control w-20">
+            <div class="input-group-addon">
+              <button class="btn btn-primary" ng-click="addEdu()">Add</button>
+            </div>
+          </div>     
+          <div ng-module="edus">
+            <div class="form-item input-group" ng-repeat="edu in edus track by $index">
+              <input type="text" ng-model="edu.startYear" placeholder="2009" class="inline-control w-15">
+              <input type="text" ng-model="edu.endYear" placeholder="2013" class="inline-control w-15">
+              <input type="text" ng-model="edu.college" placeholder="X X 大学" class="inline-control w-40" >
+              <input type="text" ng-model="edu.level" placeholder="本科" class="inline-control w-20">
+              <div class="input-group-addon">
+                <button class="btn btn-danger" ng-click="removeEdu($index)" aria-label="Remove">X</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn btn-default btn-block" ng-click="setSkill()"><span class="glyphicon {{skillIcon}}"></span>个人技能</button>
+        <div class="form-items" ng-hide="showSkill">
+            <div class="input-group">
+              <input type="text" ng-model="skill.skill" placeholder="add your skill" class="form-control">
+              <div class="input-group-addon">
+                <button class="btn btn-primary" ng-click="addSkill()">Add</button>
+              </div>
+            </div>
+            <div ng-module="skills">
+              <div class="form-item input-group" ng-repeat="skill in skills track by $index">
+                <input type="text" ng-model="skill.skill" placeholder="edit your skill" class="form-control">
+                <div class="input-group-addon">
+                  <button class="btn btn-danger" ng-click="removeSkill($index)" aria-label="Remove">X</button>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-6 section-view">
+    <h1 class="view-name"style="color:{{user.nameColor}}">{{user.name}}</h1>
+    <div class="view-contact clearfix" ng-hide="showContact">
+      <h2 class="title">联系方式</h2>
+      <p class="col-xs-6">Phone: {{user.phone}}</p>
+      <p class="col-xs-6">Mail: {{user.mail}}</p>
+      <p class="col-xs-6">Blog: {{user.blog}}</p>
+      <p class="col-xs-6">GitHub: {{user.github}}</p>
+    </div>
+    <div class="view-education" ng-hide="showEducation">
+      <h2 class="title">教育背景</h2>
+      <div ng-module="edus" class="clearfix">
+        <div ng-repeat="edu in edus track by $index">
+          <p class="col-xs-4">{{edu.startYear}}-{{edu.endYear}}</p>
+          <p class="col-xs-4 text-center">{{edu.college}}</p>
+          <p class="col-xs-4 text-right">{{edu.level}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="view-skill" ng-hide="showSkill">
+      <h2 class="title">个人技能</h2>
+      <ul ng-module="skills">
+        <li ng-repeat="skill in skills track by $index">
+          {{skill.skill}}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
